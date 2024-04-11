@@ -7,7 +7,7 @@ These endpoints use REST and will manage (CRUD) entities like establishments, re
 
 ## Documentation
 
-You can check the project documentation here.
+You can check the project documentation [here](docs).
 
 ## Table of Contents
 
