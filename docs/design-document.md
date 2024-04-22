@@ -80,29 +80,39 @@ The application consists of four main entities:
 
 The backend API exposes the following endpoints:
 
+### Users
+
 - `POST /api/users/register` Register a new user
 - `POST /api/users/login` Log in an existing user
+
+### Establishment
 
 - `GET /api/establishment` Retrieve all establishments
 - `GET /api/establishment/{establishmentId}` Retrieve specific establishment
 - `POST /api/establishment` Create a new establishment
-- `PUT /api/establishment/{establishmentId}`Update an existing task (this will be locked in the future)
+- `PATCH /api/establishment/{establishmentId}`Update an existing task (this will be locked in the future)
 - `DELETE /api/establishment/{establishmentId}` Delete an establishment (this will be locked in the future)
+
+### Review
 
 - `GET /api/establishment/{establishmentId}/review` Retrieve all reviews from establishment
 - `GET /api/establishment/{establishmentId}/review/{reviewId}` Retrieve specific review from establishment
 - `POST /api/establishment/{establishmentId}/review` Create a review for an establishment
-- `PUT /api/establishment/{establishmentId}/review/{reviewId}` Update a review
+- `PATCH /api/establishment/{establishmentId}/review/{reviewId}` Update a review
 - `DELETE /api/establishment/{establishmentId}/review/{reviewId}` Delete a review
+
+### Comment
 
 - `GET /api/review/{reviewId}/comment` Retrieve all comments from review
 - `GET /api/review/{reviewId}/comment/{commentId}` Retrieve all comments from review
 - `POST /api/review/{reviewId}/comment/{commentId}` Create a comment for a review
-- `PUT /api/review/{reviewId}/comment/{commentId}` Update a comment
+- `PATCH /api/review/{reviewId}/comment/{commentId}` Update a comment
 - `DELETE /api/review/{reviewId}/comment/{commentId}` Delete a comment
+
+### Reaction
 
 - `GET /api/review/{reviewId}/reaction` Retrieve all reactions from review
 - `GET /api/comment/{commentId}/reaction` Retrieve all reactions from comment
-- `POST /api/review/{reviewId}/reaction` Create a reaction for a review
+- `PATCH /api/review/{reviewId}/reaction` Create a reaction for a review
 - `POST /api/comment/{commentId}/reaction` Create a reaction for a comment
 - `DELETE /api/reaction/{reactionId}` Delete a reaction
