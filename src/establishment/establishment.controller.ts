@@ -10,6 +10,8 @@ import {
 import { CreateEstablishmentDto } from './dto/create-establishment.dto';
 import { UpdateEstablishmentDto } from './dto/update-establishment.dto';
 import { EstablishmentService } from './establishment.service';
+import { Establishment } from './interfaces/establishment.interface';
+import { UUID } from 'crypto';
 
 @Controller('establishment')
 export class EstablishmentController {
@@ -21,25 +23,25 @@ export class EstablishmentController {
   }
 
   @Get()
-  findAll() {
+  findAll(): Establishment[] {
     return this.establishmentService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.establishmentService.findOne(+id);
+  findOne(@Param('id') id: UUID) {
+    return this.establishmentService.findOne(id);
   }
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id') id: UUID,
     @Body() updateEstablishmentDto: UpdateEstablishmentDto,
   ) {
-    return this.establishmentService.update(+id, updateEstablishmentDto);
+    return this.establishmentService.update(id, updateEstablishmentDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.establishmentService.remove(+id);
+  remove(@Param('id') id: UUID) {
+    return this.establishmentService.remove(id);
   }
 }
