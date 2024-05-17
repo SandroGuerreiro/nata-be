@@ -1,26 +1,47 @@
 import { Injectable } from '@nestjs/common';
 import { CreateEstablishmentDto } from './dto/create-establishment.dto';
 import { UpdateEstablishmentDto } from './dto/update-establishment.dto';
+import { Establishment } from './interfaces/establishment.interface';
+import { UUID, randomUUID } from 'crypto';
 
 @Injectable()
 export class EstablishmentService {
-  create(createEstablishmentDto: CreateEstablishmentDto) {
-    return 'This action adds a new establishment';
+  private establishments: Establishment[] = [];
+
+  create(establishment: CreateEstablishmentDto) {
+    const newEstablishment: Establishment = {
+      id: randomUUID(),
+      ...establishment,
+    };
+
+    this.establishments.push(newEstablishment);
+    return newEstablishment;
   }
 
   findAll() {
-    return `This action returns all establishment`;
+    return this.establishments;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} establishment`;
+  findOne(id: UUID) {
+    return this.establishments.find((establishment) => establishment.id === id);
   }
 
-  update(id: number, updateEstablishmentDto: UpdateEstablishmentDto) {
-    return `This action updates a #${id} establishment`;
+  update(id: UUID, updateEstablishmentDto: UpdateEstablishmentDto) {
+    this.establishments = this.establishments.map((establishment) =>
+      establishment.id === id
+        ? { ...establishment, ...updateEstablishmentDto }
+        : establishment,
+    );
+
+    return 'Establishment updated';
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} establishment`;
+  remove(id: UUID) {
+    this.establishments.filter((establishment) => establishment.id === id);
+    const index = this.establishments.findIndex(
+      (establishment) => establishment['id'] === id,
+    );
+    if (index !== -1) this.establishments.splice(index, 1);
+    return 'Establishment removed';
   }
 }
