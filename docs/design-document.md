@@ -66,6 +66,24 @@ The Nata Application follows a three-tier architecture:
 - Backend Layer: Backend API using REST built with Nest.js to handle logic and data access.
 - Data Layer: PostgresSQL database for storing user accounts, establishments, reviews and comments data
 
+```mermaid
+graph TD;
+    FrontendLayer --> BackendLayer
+    BackendLayer --> DataLayer
+
+    subgraph FrontendLayer
+        A[Not defined]
+    end
+
+    subgraph BackendLayer
+        B[Nest.js API]
+    end
+
+    subgraph DataLayer
+        C[PostgreSQL Database]
+    end
+```
+
 ## **6. Data Model**
 
 The application consists of four main entities:
@@ -75,6 +93,62 @@ The application consists of four main entities:
 3. Reviews: Stores review information such as establishment, user ID, title and description
 4. Comments: Stores comments information such as review ID, user ID, text and date
 5. Reactions: Stores reactions information such as comment ID, review ID, and reaction
+
+```mermaid
+erDiagram
+    User {
+        int id PK
+        string username
+        string email
+        string socialId
+        string password
+        date createdAt
+    }
+
+    Establishment {
+        int id PK
+        string name
+        string description
+        string address
+        int userId FK
+        date createdAt
+    }
+
+    Review {
+        int id PK
+        int establishmentId FK
+        int userId FK
+        string title
+        string description
+        date createdAt
+    }
+
+    Comment {
+        int id PK
+        int reviewId FK
+        int userId FK
+        string text
+        date createdAt
+    }
+
+    Reaction {
+        int id PK
+        int commentId FK
+        int reviewId FK
+        string reactionType
+        date createdAt
+    }
+
+    User ||--o{ Establishment: "owns"
+    User ||--o{ Review: "writes"
+    User ||--o{ Comment: "writes"
+    User ||--o{ Reaction: "gives"
+
+    Establishment ||--o{ Review: "has"
+    Review ||--o{ Comment: "has"
+    Comment ||--o{ Reaction: "has"
+    Review ||--o{ Reaction: "has"
+```
 
 ## **7. API Documentation**
 
