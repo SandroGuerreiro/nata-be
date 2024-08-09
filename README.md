@@ -16,4 +16,5 @@ You can check the project documentation [here](docs).
 ## How to run the project?
 
 ### To start the project
+
     pnpm run start

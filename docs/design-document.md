@@ -8,7 +8,6 @@
 - [Data Model](#6-data-model)
 - [API Documentation](#7-api-documentation)
 
-
 ## **1. Introduction**
 
 The Nata is a web-based review and recommendation platform for restaurants, bars and cafes provided by the user community of the platform. This document outlines the design and architecture of the backend services only, with no insight of how UX/UI will work.
@@ -45,7 +44,7 @@ The initial scope of the project includes:
 
 ### **Review Management:**
 
-- Users should be able to create, update, delete  their own reviews
+- Users should be able to create, update, delete their own reviews
 - Users should be able to list reviews per establishment
 
 ### **Comment Management:**
