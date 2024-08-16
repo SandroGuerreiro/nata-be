@@ -1,0 +1,68 @@
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model User {
+    id             String          @id @default(uuid())
+    username       String
+    email          String          @unique
+    socialId       String?
+    password       String?
+    createdAt      DateTime        @default(now())
+    establishments Establishment[]
+    reviews        Review[]
+    comments       Comment[]
+    reactions      Reaction[]
+}
+
+model Establishment {
+    id          String   @id @default(uuid())
+    name        String
+    description String
+    address     String
+    userId      String
+    createdAt   DateTime @default(now())
+    user        User     @relation(fields: [userId], references: [id])
+    reviews     Review[]
+}
+
+model Review {
+    id              String        @id @default(uuid())
+    establishmentId String
+    userId          String
+    title           String
+    description     String
+    createdAt       DateTime      @default(now())
+    establishment   Establishment @relation(fields: [establishmentId], references: [id])
+    user            User          @relation(fields: [userId], references: [id])
+    comments        Comment[]
+    reactions       Reaction[]
+}
+
+model Comment {
+    id        String     @id @default(uuid())
+    reviewId  String
+    userId    String
+    text      String
+    createdAt DateTime   @default(now())
+    review    Review     @relation(fields: [reviewId], references: [id])
+    user      User       @relation(fields: [userId], references: [id])
+    reactions Reaction[]
+}
+
+model Reaction {
+    id           String   @id @default(uuid())
+    commentId    String?
+    reviewId     String?
+    reactionType String
+    createdAt    DateTime @default(now())
+    comment      Comment? @relation(fields: [commentId], references: [id])
+    review       Review?  @relation(fields: [reviewId], references: [id])
+    userId       String
+    user         User     @relation(fields: [userId], references: [id])
+}

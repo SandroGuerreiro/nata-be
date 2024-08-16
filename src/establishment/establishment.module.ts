@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
 import { EstablishmentService } from './establishment.service';
 import { EstablishmentController } from './establishment.controller';
+import { PrismaModule } from 'src/prisma.module';
+import { EstablishmentRepository } from './establishment.repository';
 
 @Module({
+  imports: [PrismaModule],
   controllers: [EstablishmentController],
-  providers: [EstablishmentService],
+  providers: [EstablishmentService, EstablishmentRepository],
 })
 export class EstablishmentModule {}
