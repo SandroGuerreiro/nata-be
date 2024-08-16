@@ -3,16 +3,27 @@ import { CreateEstablishmentDto } from './dto/create-establishment.dto';
 import { UpdateEstablishmentDto } from './dto/update-establishment.dto';
 import { Establishment } from './interfaces/establishment.interface';
 import { UUID, randomUUID } from 'crypto';
+import { EstablishmentRepository } from './establishment.repository';
 
 @Injectable()
 export class EstablishmentService {
   private establishments: Establishment[] = [];
+  constructor(
+    private readonly establishmentRepository: EstablishmentRepository,
+  ) {}
 
-  create(establishment: CreateEstablishmentDto) {
+  async create(establishment: CreateEstablishmentDto) {
     const newEstablishment: Establishment = {
       id: randomUUID(),
       ...establishment,
     };
+
+    const result = await this.establishmentRepository.createEstablishment({
+      ...establishment,
+      user: {
+        connect: { id: establishment.user },
+      },
+    });
 
     this.establishments.push(newEstablishment);
     return newEstablishment;

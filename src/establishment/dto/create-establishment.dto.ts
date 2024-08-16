@@ -1,4 +1,11 @@
-import { IsNotEmpty, IsString, Length, MaxLength } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsString,
+  IsUUID,
+  Length,
+  MaxLength,
+} from 'class-validator';
+import { UUID } from 'crypto';
 
 export class CreateEstablishmentDto {
   @IsNotEmpty()
@@ -8,6 +15,15 @@ export class CreateEstablishmentDto {
 
   @IsNotEmpty()
   @IsString()
+  @MaxLength(255)
+  description: string;
+
+  @IsNotEmpty()
+  @IsString()
   @MaxLength(100)
   address: string;
+
+  @IsNotEmpty()
+  @IsUUID()
+  user: UUID;
 }
