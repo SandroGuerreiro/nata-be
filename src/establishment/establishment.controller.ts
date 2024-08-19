@@ -10,6 +10,7 @@ import {
 import { CreateEstablishmentDto } from './dto/create-establishment.dto';
 import { UpdateEstablishmentDto } from './dto/update-establishment.dto';
 import { EstablishmentService } from './establishment.service';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Establishment } from './interfaces/establishment.interface';
 import { UUID } from 'crypto';
 
@@ -23,7 +24,7 @@ export class EstablishmentController {
   }
 
   @Get()
-  findAll(): Establishment[] {
+  findAll() {
     return this.establishmentService.findAll();
   }
 
