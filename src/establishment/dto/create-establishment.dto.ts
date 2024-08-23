@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsNotEmpty,
   IsString,
@@ -23,6 +24,11 @@ export class CreateEstablishmentDto {
   @MaxLength(100)
   address: string;
 
+  @ApiProperty({
+    description: 'The unique identifier for the user',
+    type: String,
+    format: 'uuid',
+  })
   @IsNotEmpty()
   @IsUUID()
   user: UUID;
