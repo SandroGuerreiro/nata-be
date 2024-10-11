@@ -12,13 +12,22 @@ You can check the project documentation [here](docs).
 ## Table of Contents
 
 - [How to run the project?](#how-to-run-the-project)
+- [To check the endpoints documentation](#how-to-check-the-endpoints-documentation)
 
 ## How to run the project?
 
-### To start the project
+### To start the project (manually)
 
-    pnpm run start
+  ```
+  pnpm dev
+  ```
 
-### To check the endpoints documentation
+### To run the project as production with docker
+
+  ```
+  pnpm prod
+  ```
+
+## To check the endpoints documentation
 
 Start the project and access http://localhost:3000/docs
